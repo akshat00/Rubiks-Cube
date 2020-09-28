@@ -8,30 +8,29 @@ void init();
 void display();
 void reshape(int, int);
 
+// Array to store the color values of the different faces in the rubik's cube
 vector<vector<vector<vector<int>>>> cube_color = {{{{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}}, {{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}}, {{{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}}, {{{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}}, {{{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}}};
 
-void cube();
+void cube(); // To display the stationary cube
 
-void cube_front_face();
-void cube_back_face();
-void cube_left_face();
-void cube_right_face();
-void cube_top_face();
-void cube_bottom_face();
+void cube_front_face();  // To display a single small square for the front face
+void cube_back_face();   // To display a single small square for the back face
+void cube_left_face();   // To display a single small square for the left face
+void cube_right_face();  // To display a single small square for the right face
+void cube_top_face();    // To display a single small square for the top face
+void cube_bottom_face(); // To display a single small square for the bottom face
 
-void cube_col1();
-void cube_col2();
-void cube_col3();
+void cube_col1(); // To display the first column of the cube
+void cube_col2(); // To display the second column of the cube
+void cube_col3(); // To display the third column of the cube
 
-void cube_rotate_col(int x, int angle, int reverse);
+void cube_rotate_col(int x, int angle, int reverse); // To display the column with rotation
 
-void cube_row1();
-void cube_row2();
-void cube_row3();
+void cube_row1(); // To display the first row of the cube
+void cube_row2(); // To display the second row of the cube
+void cube_row3(); // To display the third row of the cube
 
-void cube_rotate_row(int x, int angle, int reverse);
-
-void look(int key, int x, int y);
+void cube_rotate_row(int x, int angle, int reverse); // To display the row with rotation
 
 int main(int argc, char **argv)
 {
