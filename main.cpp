@@ -11,6 +11,10 @@ void reshape(int, int);
 // Array to store the color values of the different faces in the rubik's cube
 vector<vector<vector<vector<int>>>> cube_color = {{{{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}}, {{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}}, {{{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}}, {{{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}}, {{{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}}};
 
+int flag = 0;                 // To check if the mouse left key is pressed or not
+float angle1 = 0, angle2 = 0; // Angles to alter the camera view
+int btn_x, btn_y;             // To store the value of the location where the left mouse key was pressed and also track its position while it is pressed
+
 void cube(); // To display the stationary cube
 
 void cube_front_face();  // To display a single small square for the front face
@@ -38,6 +42,10 @@ void cube_face3(); // To display the third face of the cube
 
 void cube_rotate_face(int x, int angle, int reverse); // To display the face with rotation
 
+void detect_button(int button, int state, int x, int y); // To detect when the left key is pressed and released
+
+void change_camera_position(int x, int y); // To change the camera view using mouse inputs
+
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
@@ -49,6 +57,9 @@ int main(int argc, char **argv)
     init();
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
+    glutMouseFunc(detect_button);
+    glutMotionFunc(change_camera_position);
+
     glutMainLoop();
 
     return 0;
@@ -56,7 +67,7 @@ int main(int argc, char **argv)
 
 void init()
 {
-    glClearColor(1, 1, 1, 1);
+    glClearColor(0.31, 0.32, 0.34, 1);
     glEnable(GL_DEPTH_TEST);
 }
 
@@ -75,6 +86,58 @@ void reshape(int width, int height)
     glLoadIdentity();
     gluPerspective(60, 1.67, 2, 50);
     glMatrixMode(GL_MODELVIEW);
+}
+
+void detect_button(int button, int state, int x, int y)
+{
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    {
+        btn_x = x;
+        btn_y = y;
+        flag = 1;
+    }
+
+    else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
+    {
+        flag = 0;
+    }
+}
+
+void change_camera_position(int x, int y)
+{
+    if (flag == 1)
+    {
+
+        if (angle1 >= 90 && angle1 <= 270)
+        {
+            angle2 += (btn_x - x) * 0.5;
+        }
+
+        else if (angle1 > -90)
+        {
+            angle2 -= (btn_x - x) * 0.5;
+        }
+
+        else if (angle1 <= -90 && angle1 > -270)
+        {
+            angle2 += (btn_x - x) * 0.5;
+        }
+
+        else if (angle1 <= -270 && angle1 >= -360)
+        {
+            angle2 -= (btn_x - x) * 0.5;
+        }
+
+        angle1 -= (btn_y - y) * 0.5;
+
+        angle1 = (abs(angle1) > 360) ? 0 : angle1;
+        angle2 = (abs(angle2) > 360) ? 0 : angle2;
+
+        btn_x = x;
+        btn_y = y;
+
+        cube();
+    }
 }
 
 void cube_front_face(vector<int> &a)
@@ -391,7 +454,8 @@ void cube()
     glLoadIdentity();
 
     glTranslated(0, 0, -20);
-    glRotated(60, 1, 1, 0);
+    glRotated(angle1, 1, 0, 0);
+    glRotated(angle2, 0, 1, 0);
 
     glLineWidth(2);
     cube_col1();
@@ -407,13 +471,14 @@ void cube_rotate_col(int x, int angle, int reverse)
     {
         if (reverse == 1)
         {
-            for (float i = 0; i >= -angle; i -= 0.5)
+            for (float i = 0; i >= -angle; i -= 0.8)
             {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glLoadIdentity();
 
                 glTranslated(0, 0, -20);
-                glRotated(60, 1, 1, 0);
+                glRotated(angle1, 1, 0, 0);
+                glRotated(angle2, 0, 1, 0);
 
                 glRotated(i, 1, 0, 0);
                 cube_col1();
@@ -426,13 +491,14 @@ void cube_rotate_col(int x, int angle, int reverse)
             }
         }
 
-        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        for (float i = 0; i <= angle && !reverse; i += 0.8)
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glLoadIdentity();
 
             glTranslated(0, 0, -20);
-            glRotated(60, 1, 1, 0);
+            glRotated(angle1, 1, 0, 0);
+            glRotated(angle2, 0, 1, 0);
 
             glRotated(i, 1, 0, 0);
             cube_col1();
@@ -449,13 +515,14 @@ void cube_rotate_col(int x, int angle, int reverse)
     {
         if (reverse == 1)
         {
-            for (float i = 0; i >= -angle; i -= 0.5)
+            for (float i = 0; i >= -angle; i -= 0.8)
             {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glLoadIdentity();
 
                 glTranslated(0, 0, -20);
-                glRotated(60, 1, 1, 0);
+                glRotated(angle1, 1, 0, 0);
+                glRotated(angle2, 0, 1, 0);
 
                 glLineWidth(2);
                 cube_col1();
@@ -470,13 +537,14 @@ void cube_rotate_col(int x, int angle, int reverse)
             }
         }
 
-        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        for (float i = 0; i <= angle && !reverse; i += 0.8)
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glLoadIdentity();
 
             glTranslated(0, 0, -20);
-            glRotated(60, 1, 1, 0);
+            glRotated(angle1, 1, 0, 0);
+            glRotated(angle2, 0, 1, 0);
 
             glLineWidth(2);
             cube_col1();
@@ -495,13 +563,14 @@ void cube_rotate_col(int x, int angle, int reverse)
     {
         if (reverse == 1)
         {
-            for (float i = 0; i >= -angle; i -= 0.5)
+            for (float i = 0; i >= -angle; i -= 0.8)
             {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glLoadIdentity();
 
                 glTranslated(0, 0, -20);
-                glRotated(60, 1, 1, 0);
+                glRotated(angle1, 1, 0, 0);
+                glRotated(angle2, 0, 1, 0);
 
                 glLineWidth(2);
                 cube_col1();
@@ -515,13 +584,14 @@ void cube_rotate_col(int x, int angle, int reverse)
             }
         }
 
-        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        for (float i = 0; i <= angle && !reverse; i += 0.8)
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glLoadIdentity();
 
             glTranslated(0, 0, -20);
-            glRotated(60, 1, 1, 0);
+            glRotated(angle1, 1, 0, 0);
+            glRotated(angle2, 0, 1, 0);
 
             glLineWidth(2);
             cube_col1();
@@ -713,13 +783,14 @@ void cube_rotate_row(int x, int angle, int reverse)
     {
         if (reverse == 1)
         {
-            for (float i = 0; i >= -angle; i -= 0.5)
+            for (float i = 0; i >= -angle; i -= 0.8)
             {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glLoadIdentity();
 
                 glTranslated(0, 0, -20);
-                glRotated(60, 1, 1, 0);
+                glRotated(angle1, 1, 0, 0);
+                glRotated(angle2, 0, 1, 0);
 
                 glRotated(i, 0, 1, 0);
                 cube_row1();
@@ -732,13 +803,14 @@ void cube_rotate_row(int x, int angle, int reverse)
             }
         }
 
-        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        for (float i = 0; i <= angle && !reverse; i += 0.8)
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glLoadIdentity();
 
             glTranslated(0, 0, -20);
-            glRotated(60, 1, 1, 0);
+            glRotated(angle1, 1, 0, 0);
+            glRotated(angle2, 0, 1, 0);
 
             glRotated(i, 0, 1, 0);
             cube_row1();
@@ -755,13 +827,14 @@ void cube_rotate_row(int x, int angle, int reverse)
     {
         if (reverse == 1)
         {
-            for (float i = 0; i >= -angle; i -= 0.5)
+            for (float i = 0; i >= -angle; i -= 0.8)
             {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glLoadIdentity();
 
                 glTranslated(0, 0, -20);
-                glRotated(60, 1, 1, 0);
+                glRotated(angle1, 1, 0, 0);
+                glRotated(angle2, 0, 1, 0);
 
                 glLineWidth(2);
                 cube_row1();
@@ -776,13 +849,14 @@ void cube_rotate_row(int x, int angle, int reverse)
             }
         }
 
-        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        for (float i = 0; i <= angle && !reverse; i += 0.8)
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glLoadIdentity();
 
             glTranslated(0, 0, -20);
-            glRotated(60, 1, 1, 0);
+            glRotated(angle1, 1, 0, 0);
+            glRotated(angle2, 0, 1, 0);
 
             glLineWidth(2);
             cube_row1();
@@ -801,13 +875,14 @@ void cube_rotate_row(int x, int angle, int reverse)
     {
         if (reverse == 1)
         {
-            for (float i = 0; i >= -angle; i -= 0.5)
+            for (float i = 0; i >= -angle; i -= 0.8)
             {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glLoadIdentity();
 
                 glTranslated(0, 0, -20);
-                glRotated(60, 1, 1, 0);
+                glRotated(angle1, 1, 0, 0);
+                glRotated(angle2, 0, 1, 0);
 
                 glLineWidth(2);
                 cube_row1();
@@ -821,13 +896,14 @@ void cube_rotate_row(int x, int angle, int reverse)
             }
         }
 
-        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        for (float i = 0; i <= angle && !reverse; i += 0.8)
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glLoadIdentity();
 
             glTranslated(0, 0, -20);
-            glRotated(60, 1, 1, 0);
+            glRotated(angle1, 1, 0, 0);
+            glRotated(angle2, 0, 1, 0);
 
             glLineWidth(2);
             cube_row1();
@@ -1024,13 +1100,14 @@ void cube_rotate_face(int x, int angle, int reverse)
     {
         if (reverse == 1)
         {
-            for (float i = 0; i >= -angle; i -= 0.5)
+            for (float i = 0; i >= -angle; i -= 0.8)
             {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glLoadIdentity();
 
                 glTranslated(0, 0, -20);
-                glRotated(60, 1, 1, 0);
+                glRotated(angle1, 1, 0, 0);
+                glRotated(angle2, 0, 1, 0);
 
                 glRotated(i, 0, 0, -1);
                 cube_face1();
@@ -1043,13 +1120,14 @@ void cube_rotate_face(int x, int angle, int reverse)
             }
         }
 
-        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        for (float i = 0; i <= angle && !reverse; i += 0.8)
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glLoadIdentity();
 
             glTranslated(0, 0, -20);
-            glRotated(60, 1, 1, 0);
+            glRotated(angle1, 1, 0, 0);
+            glRotated(angle2, 0, 1, 0);
 
             glRotated(i, 0, 0, -1);
             cube_face1();
@@ -1066,13 +1144,14 @@ void cube_rotate_face(int x, int angle, int reverse)
     {
         if (reverse == 1)
         {
-            for (float i = 0; i >= -angle; i -= 0.5)
+            for (float i = 0; i >= -angle; i -= 0.8)
             {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glLoadIdentity();
 
                 glTranslated(0, 0, -20);
-                glRotated(60, 1, 1, 0);
+                glRotated(angle1, 1, 0, 0);
+                glRotated(angle2, 0, 1, 0);
 
                 glLineWidth(2);
                 cube_face1();
@@ -1087,13 +1166,14 @@ void cube_rotate_face(int x, int angle, int reverse)
             }
         }
 
-        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        for (float i = 0; i <= angle && !reverse; i += 0.8)
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glLoadIdentity();
 
             glTranslated(0, 0, -20);
-            glRotated(60, 1, 1, 0);
+            glRotated(angle1, 1, 0, 0);
+            glRotated(angle2, 0, 1, 0);
 
             glLineWidth(2);
             cube_face1();
@@ -1112,13 +1192,14 @@ void cube_rotate_face(int x, int angle, int reverse)
     {
         if (reverse == 1)
         {
-            for (float i = 0; i >= -angle; i -= 0.5)
+            for (float i = 0; i >= -angle; i -= 0.8)
             {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glLoadIdentity();
 
                 glTranslated(0, 0, -20);
-                glRotated(60, 1, 1, 0);
+                glRotated(angle1, 1, 0, 0);
+                glRotated(angle2, 0, 1, 0);
 
                 glLineWidth(2);
                 cube_face1();
@@ -1132,13 +1213,14 @@ void cube_rotate_face(int x, int angle, int reverse)
             }
         }
 
-        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        for (float i = 0; i <= angle && !reverse; i += 0.8)
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glLoadIdentity();
 
             glTranslated(0, 0, -20);
-            glRotated(60, 1, 1, 0);
+            glRotated(angle1, 1, 0, 0);
+            glRotated(angle2, 0, 1, 0);
 
             glLineWidth(2);
             cube_face1();
