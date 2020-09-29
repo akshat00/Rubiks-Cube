@@ -32,6 +32,12 @@ void cube_row3(); // To display the third row of the cube
 
 void cube_rotate_row(int x, int angle, int reverse); // To display the row with rotation
 
+void cube_face1(); // To display the first face of the cube
+void cube_face2(); // To display the second face of the cube
+void cube_face3(); // To display the third face of the cube
+
+void cube_rotate_face(int x, int angle, int reverse); // To display the face with rotation
+
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
@@ -59,6 +65,7 @@ void display()
     cube();
     cube_rotate_col(2, 90, 1);
     cube_rotate_row(2, 90, 0);
+    cube_rotate_face(2, 90, 0);
 }
 
 void reshape(int width, int height)
@@ -829,6 +836,317 @@ void cube_rotate_row(int x, int angle, int reverse)
             glRotated(i, 0, 1, 0);
             cube_row3();
             glRotated(-i, 0, 1, 0);
+
+            glutSwapBuffers();
+        }
+    }
+}
+
+void cube_face1()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            cube_front_face(cube_color[0][i][j]);
+            glTranslated(2, 0, 0);
+        }
+        glTranslated(-6, -2, 0);
+    }
+
+    glTranslated(0, 6, 4);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_left_face(cube_color[2][i][2]);
+        glTranslated(0, -2, 0);
+    }
+
+    glTranslated(0, 6, -4);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_bottom_face(cube_color[5][0][i]);
+        glTranslated(2, 0, 0);
+    }
+
+    glTranslated(-6, 0, 0);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_right_face(cube_color[3][i][0]);
+        glTranslated(0, -2, 0);
+    }
+
+    glTranslated(4, 6, 4);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_top_face(cube_color[4][2][i]);
+        glTranslated(-2, 0, 0);
+    }
+
+    vector<int> temp = {0, 0, 0};
+
+    glTranslated(-2, -4, 0);
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            cube_back_face(temp);
+            glTranslated(2, 0, 0);
+        }
+        glTranslated(-6, 2, 0);
+    }
+    glTranslated(4, -2, -6);
+}
+
+void cube_face2()
+{
+    vector<int> temp = {0, 0, 0};
+
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            cube_front_face(temp);
+            glTranslated(2, 0, 0);
+        }
+        glTranslated(-6, -2, 0);
+    }
+
+    glTranslated(0, 6, 4);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_left_face(cube_color[2][i][1]);
+        glTranslated(0, -2, 0);
+    }
+
+    glTranslated(0, 6, -4);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_bottom_face(cube_color[5][1][i]);
+        glTranslated(2, 0, 0);
+    }
+
+    glTranslated(-6, 0, 0);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_right_face(cube_color[3][i][1]);
+        glTranslated(0, -2, 0);
+    }
+
+    glTranslated(4, 6, 4);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_top_face(cube_color[4][1][i]);
+        glTranslated(-2, 0, 0);
+    }
+
+    glTranslated(-2, -4, 0);
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            cube_back_face(temp);
+            glTranslated(2, 0, 0);
+        }
+        glTranslated(-6, 2, 0);
+    }
+    glTranslated(4, -2, -6);
+}
+
+void cube_face3()
+{
+    vector<int> temp = {0, 0, 0};
+
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            cube_front_face(temp);
+            glTranslated(2, 0, 0);
+        }
+        glTranslated(-6, -2, 0);
+    }
+
+    glTranslated(0, 6, 4);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_left_face(cube_color[2][i][0]);
+        glTranslated(0, -2, 0);
+    }
+
+    glTranslated(0, 6, -4);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_bottom_face(cube_color[5][2][i]);
+        glTranslated(2, 0, 0);
+    }
+
+    glTranslated(-6, 0, 0);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_right_face(cube_color[3][i][2]);
+        glTranslated(0, -2, 0);
+    }
+
+    glTranslated(4, 6, 4);
+
+    for (int i = 0; i < 3; i++)
+    {
+        cube_top_face(cube_color[4][0][i]);
+        glTranslated(-2, 0, 0);
+    }
+
+    glTranslated(-2, -4, 0);
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            cube_back_face(cube_color[1][i][j]);
+            glTranslated(2, 0, 0);
+        }
+        glTranslated(-6, 2, 0);
+    }
+}
+
+void cube_rotate_face(int x, int angle, int reverse)
+{
+    if (x == 0)
+    {
+        if (reverse == 1)
+        {
+            for (float i = 0; i >= -angle; i -= 0.5)
+            {
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glLoadIdentity();
+
+                glTranslated(0, 0, -20);
+                glRotated(60, 1, 1, 0);
+
+                glRotated(i, 0, 0, -1);
+                cube_face1();
+                glRotated(-i, 0, 0, -1);
+
+                cube_face2();
+                cube_face3();
+
+                glutSwapBuffers();
+            }
+        }
+
+        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glLoadIdentity();
+
+            glTranslated(0, 0, -20);
+            glRotated(60, 1, 1, 0);
+
+            glRotated(i, 0, 0, -1);
+            cube_face1();
+            glRotated(-i, 0, 0, -1);
+
+            cube_face2();
+            cube_face3();
+
+            glutSwapBuffers();
+        }
+    }
+
+    else if (x == 1)
+    {
+        if (reverse == 1)
+        {
+            for (float i = 0; i >= -angle; i -= 0.5)
+            {
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glLoadIdentity();
+
+                glTranslated(0, 0, -20);
+                glRotated(60, 1, 1, 0);
+
+                glLineWidth(2);
+                cube_face1();
+
+                glRotated(i, 0, 0, -1);
+                cube_face2();
+                glRotated(-i, 0, 0, -1);
+
+                cube_face3();
+
+                glutSwapBuffers();
+            }
+        }
+
+        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glLoadIdentity();
+
+            glTranslated(0, 0, -20);
+            glRotated(60, 1, 1, 0);
+
+            glLineWidth(2);
+            cube_face1();
+
+            glRotated(i, 0, 0, -1);
+            cube_face2();
+            glRotated(-i, 0, 0, -1);
+
+            cube_face3();
+
+            glutSwapBuffers();
+        }
+    }
+
+    else if (x == 2)
+    {
+        if (reverse == 1)
+        {
+            for (float i = 0; i >= -angle; i -= 0.5)
+            {
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glLoadIdentity();
+
+                glTranslated(0, 0, -20);
+                glRotated(60, 1, 1, 0);
+
+                glLineWidth(2);
+                cube_face1();
+                cube_face2();
+
+                glRotated(i, 0, 0, -1);
+                cube_face3();
+                glRotated(-i, 0, 0, -1);
+
+                glutSwapBuffers();
+            }
+        }
+
+        for (float i = 0; i <= angle && !reverse; i += 0.5)
+        {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glLoadIdentity();
+
+            glTranslated(0, 0, -20);
+            glRotated(60, 1, 1, 0);
+
+            glLineWidth(2);
+            cube_face1();
+            cube_face2();
+
+            glRotated(i, 0, 0, -1);
+            cube_face3();
+            glRotated(-i, 0, 0, -1);
 
             glutSwapBuffers();
         }
