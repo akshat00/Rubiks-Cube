@@ -1,3 +1,5 @@
+//File for graphics
+
 #include <GL/glut.h>
 #include <vector>
 #include <iostream>
