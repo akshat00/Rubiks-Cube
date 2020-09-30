@@ -77,8 +77,8 @@ void init()
 void display()
 {
     cube();
-    cube_rotate_col(0, 90, 0);
-    cube_rotate_row(1, 90, 1);
+    cube_rotate_col(1, 90, 1);
+    cube_rotate_row(0, 90, 0);
     cube_rotate_face(2, 90, 1);
 }
 
@@ -501,6 +501,21 @@ void cube_rotate_col(int x, int angle, int reverse)
                 }
             }
 
+            for (int k = 0; k < (angle / 90); k++)
+            {
+                temp = cube_color[2][0][0];
+                cube_color[2][0][0] = cube_color[2][0][2];
+                cube_color[2][0][2] = cube_color[2][2][2];
+                cube_color[2][2][2] = cube_color[2][2][0];
+                cube_color[2][2][0] = temp;
+
+                temp = cube_color[2][0][1];
+                cube_color[2][0][1] = cube_color[2][1][2];
+                cube_color[2][1][2] = cube_color[2][2][1];
+                cube_color[2][2][1] = cube_color[2][1][0];
+                cube_color[2][1][0] = temp;
+            }
+
             return;
         }
 
@@ -535,6 +550,21 @@ void cube_rotate_col(int x, int angle, int reverse)
                 cube_color[1][i][0] = cube_color[5][i][0];
                 cube_color[5][i][0] = temp;
             }
+        }
+
+        for (int k = 0; k < (angle / 90); k++)
+        {
+            temp = cube_color[2][0][0];
+            cube_color[2][0][0] = cube_color[2][2][0];
+            cube_color[2][2][0] = cube_color[2][2][2];
+            cube_color[2][2][2] = cube_color[2][0][2];
+            cube_color[2][0][2] = temp;
+
+            temp = cube_color[2][0][1];
+            cube_color[2][0][1] = cube_color[2][1][0];
+            cube_color[2][1][0] = cube_color[2][2][1];
+            cube_color[2][2][1] = cube_color[2][1][2];
+            cube_color[2][1][2] = temp;
         }
     }
 
@@ -654,6 +684,21 @@ void cube_rotate_col(int x, int angle, int reverse)
                 }
             }
 
+            for (int k = 0; k < (angle / 90); k++)
+            {
+                temp = cube_color[3][0][0];
+                cube_color[3][0][0] = cube_color[3][2][0];
+                cube_color[3][2][0] = cube_color[3][2][2];
+                cube_color[3][2][2] = cube_color[3][0][2];
+                cube_color[3][0][2] = temp;
+
+                temp = cube_color[3][0][1];
+                cube_color[3][0][1] = cube_color[3][1][0];
+                cube_color[3][1][0] = cube_color[3][2][1];
+                cube_color[3][2][1] = cube_color[3][1][2];
+                cube_color[3][1][2] = temp;
+            }
+
             return;
         }
 
@@ -689,6 +734,21 @@ void cube_rotate_col(int x, int angle, int reverse)
                 cube_color[1][i][2] = cube_color[5][i][2];
                 cube_color[5][i][2] = temp;
             }
+        }
+
+        for (int k = 0; k < (angle / 90); k++)
+        {
+            temp = cube_color[3][0][0];
+            cube_color[3][0][0] = cube_color[3][0][2];
+            cube_color[3][0][2] = cube_color[3][2][2];
+            cube_color[3][2][2] = cube_color[3][2][0];
+            cube_color[3][2][0] = temp;
+
+            temp = cube_color[3][0][1];
+            cube_color[3][0][1] = cube_color[3][1][2];
+            cube_color[3][1][2] = cube_color[3][2][1];
+            cube_color[3][2][1] = cube_color[3][1][0];
+            cube_color[3][1][0] = temp;
         }
     }
 }
@@ -902,6 +962,21 @@ void cube_rotate_row(int x, int angle, int reverse)
                 }
             }
 
+            for (int k = 0; k < (angle / 90); k++)
+            {
+                temp = cube_color[4][0][0];
+                cube_color[4][0][0] = cube_color[4][2][0];
+                cube_color[4][2][0] = cube_color[4][2][2];
+                cube_color[4][2][2] = cube_color[4][0][2];
+                cube_color[4][0][2] = temp;
+
+                temp = cube_color[4][0][1];
+                cube_color[4][0][1] = cube_color[4][1][0];
+                cube_color[4][1][0] = cube_color[4][2][1];
+                cube_color[4][2][1] = cube_color[4][1][2];
+                cube_color[4][1][2] = temp;
+            }
+
             return;
         }
 
@@ -934,6 +1009,21 @@ void cube_rotate_row(int x, int angle, int reverse)
                 cube_color[1][2][2 - i] = cube_color[3][0][i];
                 cube_color[3][0][i] = temp;
             }
+        }
+
+        for (int k = 0; k < (angle / 90); k++)
+        {
+            temp = cube_color[4][0][0];
+            cube_color[4][0][0] = cube_color[4][0][2];
+            cube_color[4][0][2] = cube_color[4][2][2];
+            cube_color[4][2][2] = cube_color[4][2][0];
+            cube_color[4][2][0] = temp;
+
+            temp = cube_color[4][0][1];
+            cube_color[4][0][1] = cube_color[4][1][2];
+            cube_color[4][1][2] = cube_color[4][2][1];
+            cube_color[4][2][1] = cube_color[4][1][0];
+            cube_color[4][1][0] = temp;
         }
     }
 
@@ -1047,6 +1137,21 @@ void cube_rotate_row(int x, int angle, int reverse)
                 }
             }
 
+            for (int k = 0; k < (angle / 90); k++)
+            {
+                temp = cube_color[5][0][0];
+                cube_color[5][0][0] = cube_color[5][0][2];
+                cube_color[5][0][2] = cube_color[5][2][2];
+                cube_color[5][2][2] = cube_color[5][2][0];
+                cube_color[5][2][0] = temp;
+
+                temp = cube_color[5][0][1];
+                cube_color[5][0][1] = cube_color[5][1][2];
+                cube_color[5][1][2] = cube_color[5][2][1];
+                cube_color[5][2][1] = cube_color[5][1][0];
+                cube_color[5][1][0] = temp;
+            }
+
             return;
         }
 
@@ -1080,6 +1185,21 @@ void cube_rotate_row(int x, int angle, int reverse)
                 cube_color[1][0][2 - i] = cube_color[3][2][i];
                 cube_color[3][2][i] = temp;
             }
+        }
+
+        for (int k = 0; k < (angle / 90); k++)
+        {
+            temp = cube_color[5][0][0];
+            cube_color[5][0][0] = cube_color[5][2][0];
+            cube_color[5][2][0] = cube_color[5][2][2];
+            cube_color[5][2][2] = cube_color[5][0][2];
+            cube_color[5][0][2] = temp;
+
+            temp = cube_color[5][0][1];
+            cube_color[5][0][1] = cube_color[5][1][0];
+            cube_color[5][1][0] = cube_color[5][2][1];
+            cube_color[5][2][1] = cube_color[5][1][2];
+            cube_color[5][1][2] = temp;
         }
     }
 }
@@ -1298,6 +1418,21 @@ void cube_rotate_face(int x, int angle, int reverse)
                 }
             }
 
+            for (int k = 0; k < (angle / 90); k++)
+            {
+                temp = cube_color[4][0][0];
+                cube_color[0][0][0] = cube_color[0][0][2];
+                cube_color[0][0][2] = cube_color[0][2][2];
+                cube_color[0][2][2] = cube_color[0][2][0];
+                cube_color[0][2][0] = temp;
+
+                temp = cube_color[0][0][1];
+                cube_color[0][0][1] = cube_color[0][1][2];
+                cube_color[0][1][2] = cube_color[0][2][1];
+                cube_color[0][2][1] = cube_color[0][1][0];
+                cube_color[0][1][0] = temp;
+            }
+
             return;
         }
 
@@ -1330,6 +1465,21 @@ void cube_rotate_face(int x, int angle, int reverse)
                 cube_color[3][i][0] = cube_color[4][2][i];
                 cube_color[4][2][i] = temp;
             }
+        }
+
+        for (int k = 0; k < (angle / 90); k++)
+        {
+            temp = cube_color[0][0][0];
+            cube_color[0][0][0] = cube_color[0][2][0];
+            cube_color[0][2][0] = cube_color[0][2][2];
+            cube_color[0][2][2] = cube_color[0][0][2];
+            cube_color[0][0][2] = temp;
+
+            temp = cube_color[0][0][1];
+            cube_color[0][0][1] = cube_color[0][1][0];
+            cube_color[0][1][0] = cube_color[0][2][1];
+            cube_color[0][2][1] = cube_color[0][1][2];
+            cube_color[0][1][2] = temp;
         }
     }
 
@@ -1443,6 +1593,21 @@ void cube_rotate_face(int x, int angle, int reverse)
                 }
             }
 
+            for (int k = 0; k < (angle / 90); k++)
+            {
+                temp = cube_color[1][0][0];
+                cube_color[1][0][0] = cube_color[1][2][0];
+                cube_color[1][2][0] = cube_color[1][2][2];
+                cube_color[1][2][2] = cube_color[1][0][2];
+                cube_color[1][0][2] = temp;
+
+                temp = cube_color[1][0][1];
+                cube_color[1][0][1] = cube_color[1][1][0];
+                cube_color[1][1][0] = cube_color[1][2][1];
+                cube_color[1][2][1] = cube_color[1][1][2];
+                cube_color[1][1][2] = temp;
+            }
+
             return;
         }
 
@@ -1476,6 +1641,21 @@ void cube_rotate_face(int x, int angle, int reverse)
                 cube_color[3][i][2] = cube_color[4][0][i];
                 cube_color[4][0][i] = temp;
             }
+        }
+
+        for (int k = 0; k < (angle / 90); k++)
+        {
+            temp = cube_color[1][0][0];
+            cube_color[1][0][0] = cube_color[1][0][2];
+            cube_color[1][0][2] = cube_color[1][2][2];
+            cube_color[1][2][2] = cube_color[1][2][0];
+            cube_color[1][2][0] = temp;
+
+            temp = cube_color[1][0][1];
+            cube_color[1][0][1] = cube_color[1][1][2];
+            cube_color[1][1][2] = cube_color[1][2][1];
+            cube_color[1][2][1] = cube_color[1][1][0];
+            cube_color[1][1][0] = temp;
         }
     }
 }
