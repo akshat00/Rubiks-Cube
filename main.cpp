@@ -11,8 +11,9 @@ void display();
 void reshape(int, int);
 
 // Array to store the color values of the different faces in the rubik's cube
-// vector<vector<vector<vector<int>>>> cube_color = {{{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}}, {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}}, {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}}, {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}}, {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}}};
+// vector<vector<vector<vector<int>>>> cube_color = {{{{1, 0, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}}, {{{0, 1, 0}, {0, 0, 0}, {0, 0, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{0, 0, 1}, {0, 0, 0}, {0, 0, 0}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}}, {{{1, 1, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}}, {{{0, 1, 1}, {0, 0, 0}, {0, 0, 0}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}}, {{{1, 0, 1}, {0, 0, 0}, {0, 0, 0}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}}};
 vector<vector<vector<vector<int>>>> cube_color = {{{{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}}, {{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}}, {{{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}}, {{{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}}, {{{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}}};
+vector<vector<vector<string>>> cube_pos = {{{"F1", "F2", "F3"}, {"F4", "F5", "F6"}, {"F7", "F8", "F9"}}, {{"B1", "B2", "B3"}, {"B4", "B5", "B6"}, {"B7", "B8", "B9"}}, {{"L1", "L2", "L3"}, {"L4", "L5", "L6"}, {"L7", "L8", "L9"}}, {{"R1", "R2", "R3"}, {"R4", "R5", "R6"}, {"R7", "R8", "R9"}}, {{"U1", "U2", "U3"}, {"U4", "U5", "U6"}, {"U7", "U8", "U9"}}, {{"D1", "D2", "D3"}, {"D4", "D5", "D6"}, {"D7", "D8", "D9"}}};
 
 int flag = 0;                 // To check if the mouse left key is pressed or not
 float angle1 = 0, angle2 = 0; // Angles to alter the camera view
@@ -49,6 +50,8 @@ void detect_button(int button, int state, int x, int y); // To detect when the l
 
 void change_camera_position(int x, int y); // To change the camera view using mouse inputs
 
+void get_current_pos();
+
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
@@ -77,9 +80,11 @@ void init()
 void display()
 {
     cube();
-    cube_rotate_col(1, 90, 1);
-    cube_rotate_row(0, 90, 0);
-    cube_rotate_face(2, 90, 1);
+    cube_rotate_col(0, 180, 1);
+    // cube_rotate_row(0, 90, 0);
+    // cube_rotate_face(2, 90, 1);
+
+    get_current_pos();
 }
 
 void reshape(int width, int height)
@@ -488,6 +493,7 @@ void cube_rotate_col(int x, int angle, int reverse)
             }
 
             vector<int> temp;
+            string temp1;
 
             for (int k = 0; k < (angle / 90); k++)
             {
@@ -498,6 +504,12 @@ void cube_rotate_col(int x, int angle, int reverse)
                     cube_color[5][i][0] = cube_color[1][i][0];
                     cube_color[1][i][0] = cube_color[4][i][0];
                     cube_color[4][i][0] = temp;
+
+                    temp1 = cube_pos[0][i][0];
+                    cube_pos[0][i][0] = cube_pos[5][i][0];
+                    cube_pos[5][i][0] = cube_pos[1][i][0];
+                    cube_pos[1][i][0] = cube_pos[4][i][0];
+                    cube_pos[4][i][0] = temp1;
                 }
             }
 
@@ -514,6 +526,18 @@ void cube_rotate_col(int x, int angle, int reverse)
                 cube_color[2][1][2] = cube_color[2][2][1];
                 cube_color[2][2][1] = cube_color[2][1][0];
                 cube_color[2][1][0] = temp;
+
+                temp1 = cube_pos[2][0][0];
+                cube_pos[2][0][0] = cube_pos[2][0][2];
+                cube_pos[2][0][2] = cube_pos[2][2][2];
+                cube_pos[2][2][2] = cube_pos[2][2][0];
+                cube_pos[2][2][0] = temp1;
+
+                temp1 = cube_pos[2][0][1];
+                cube_pos[2][0][1] = cube_pos[2][1][2];
+                cube_pos[2][1][2] = cube_pos[2][2][1];
+                cube_pos[2][2][1] = cube_pos[2][1][0];
+                cube_pos[2][1][0] = temp1;
             }
 
             return;
@@ -1658,4 +1682,65 @@ void cube_rotate_face(int x, int angle, int reverse)
             cube_color[1][1][0] = temp;
         }
     }
+}
+
+void get_current_pos()
+{
+    string s, temp;
+
+    for (auto item : cube_pos[4])
+    {
+        for (auto it : item)
+        {
+            temp = it[0];
+            s.append(temp);
+        }
+    }
+
+    for (auto item : cube_pos[3])
+    {
+        for (auto it : item)
+        {
+            temp = it[0];
+            s.append(temp);
+        }
+    }
+
+    for (auto item : cube_pos[0])
+    {
+        for (auto it : item)
+        {
+            temp = it[0];
+            s.append(temp);
+        }
+    }
+
+    for (auto item : cube_pos[5])
+    {
+        for (auto it : item)
+        {
+            temp = it[0];
+            s.append(temp);
+        }
+    }
+
+    for (auto item : cube_pos[2])
+    {
+        for (auto it : item)
+        {
+            temp = it[0];
+            s.append(temp);
+        }
+    }
+
+    for (int i = 2; i >= 0; i--)
+    {
+        for (int j = 2; j >= 0; j--)
+        {
+            temp = cube_pos[1][i][j][0];
+            s.append(temp);
+        }
+    }
+
+    cout << s;
 }
