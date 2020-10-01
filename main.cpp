@@ -1,4 +1,4 @@
-//File for computer graphics
+//File for graphics
 
 #include <GL/glut.h>
 #include <vector>
