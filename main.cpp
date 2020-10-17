@@ -50,19 +50,19 @@ void detect_button(int button, int state, int x, int y); // To detect when the l
 
 void change_camera_position(int x, int y); // To change the camera view using mouse inputs
 
-void get_current_pos();
+void get_current_pos(); //To get the current configuration of the rubik's cube for solving
 
-void draw_user_buttons();
+void draw_user_buttons(); //To draw the various user buttons on the screen
 
-void rotate_left_face(int flag);
-void rotate_right_face(int flag);
-void rotate_front_face(int flag);
-void rotate_back_face(int flag);
-void rotate_top_face(int flag);
-void rotate_bottom_face(int flag);
+void rotate_left_face(int flag);   // To rotate the left face for the current face visible
+void rotate_right_face(int flag);  // To rotate the right face for the current face visible
+void rotate_front_face(int flag);  // To rotate the front face for the current face visible
+void rotate_back_face(int flag);   // To rotate the back face for the current face visible
+void rotate_top_face(int flag);    // To rotate the top face for the current face visible
+void rotate_bottom_face(int flag); // To rotate the bottom face for the current face visible
 
-void shuffle_cube();
-void solve_cube();
+void shuffle_cube(); //To shuffle the ribik's cube to a random configuration
+void solve_cube();   //To automatically solve the rubick's cube to its original configuration
 
 int main(int argc, char **argv)
 {
@@ -226,6 +226,8 @@ void change_camera_position(int x, int y)
 
         btn_x = x;
         btn_y = y;
+
+        cout << angle1 << " " << angle2 << endl;
 
         cube();
     }
@@ -1957,30 +1959,90 @@ void draw_user_buttons()
 
 void rotate_left_face(int flag)
 {
-    cube_rotate_col(0, 90, flag);
+    if (angle1 <= 45 && angle1 >= -45 && angle2 <= 45 && angle2 >= -45)
+        cube_rotate_col(0, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -45 && angle2 >= -135) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 315 && angle2 >= 225))
+        cube_rotate_face(0, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -135 && angle2 >= -225) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 225 && angle2 >= 135))
+        cube_rotate_col(2, 90, !flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -225 && angle2 >= -315) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 135 && angle2 >= 45))
+        cube_rotate_face(2, 90, !flag);
 }
 
 void rotate_right_face(int flag)
 {
-    cube_rotate_col(2, 90, flag);
+    if (angle1 <= 45 && angle1 >= -45 && angle2 <= 45 && angle2 >= -45)
+        cube_rotate_col(2, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -45 && angle2 >= -135) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 315 && angle2 >= 225))
+        cube_rotate_face(2, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -135 && angle2 >= -225) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 225 && angle2 >= 135))
+        cube_rotate_col(0, 90, !flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -225 && angle2 >= -315) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 135 && angle2 >= 45))
+        cube_rotate_face(0, 90, !flag);
 }
 
 void rotate_front_face(int flag)
 {
-    cube_rotate_face(0, 90, flag);
+    if (angle1 <= 45 && angle1 >= -45 && angle2 <= 45 && angle2 >= -45)
+        cube_rotate_face(0, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -45 && angle2 >= -135) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 315 && angle2 >= 225))
+        cube_rotate_col(2, 90, !flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -135 && angle2 >= -225) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 225 && angle2 >= 135))
+        cube_rotate_face(2, 90, !flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -225 && angle2 >= -315) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 135 && angle2 >= 45))
+        cube_rotate_col(0, 90, flag);
 }
 
 void rotate_back_face(int flag)
 {
-    cube_rotate_face(2, 90, flag);
+    if (angle1 <= 45 && angle1 >= -45 && angle2 <= 45 && angle2 >= -45)
+        cube_rotate_face(2, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -45 && angle2 >= -135) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 315 && angle2 >= 225))
+        cube_rotate_col(0, 90, !flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -135 && angle2 >= -225) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 225 && angle2 >= 135))
+        cube_rotate_face(0, 90, !flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -225 && angle2 >= -315) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 135 && angle2 >= 45))
+        cube_rotate_col(2, 90, flag);
 }
 
 void rotate_top_face(int flag)
 {
-    cube_rotate_row(0, 90, flag);
+    if (angle1 <= 45 && angle1 >= -45 && angle2 <= 45 && angle2 >= -45)
+        cube_rotate_row(0, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -45 && angle2 >= -135) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 315 && angle2 >= 225))
+        cube_rotate_row(0, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -135 && angle2 >= -225) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 225 && angle2 >= 135))
+        cube_rotate_row(0, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -225 && angle2 >= -315) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 135 && angle2 >= 45))
+        cube_rotate_row(0, 90, flag);
 }
 
 void rotate_bottom_face(int flag)
 {
-    cube_rotate_row(2, 90, flag);
+    if (angle1 <= 45 && angle1 >= -45 && angle2 <= 45 && angle2 >= -45)
+        cube_rotate_row(2, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -45 && angle2 >= -135) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 315 && angle2 >= 225))
+        cube_rotate_row(2, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -135 && angle2 >= -225) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 225 && angle2 >= 135))
+        cube_rotate_row(2, 90, flag);
+
+    else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -225 && angle2 >= -315) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 135 && angle2 >= 45))
+        cube_rotate_row(2, 90, flag);
 }
