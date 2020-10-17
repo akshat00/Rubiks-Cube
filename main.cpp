@@ -11,8 +11,8 @@ void display();
 void reshape(int, int);
 
 // Array to store the color values of the different faces in the rubik's cube
-vector<vector<vector<vector<int>>>> cube_color = {{{{1, 0, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}}, {{{0, 1, 0}, {0, 0, 0}, {0, 0, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{0, 0, 1}, {0, 0, 0}, {0, 0, 0}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}}, {{{1, 1, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}}, {{{0, 1, 1}, {0, 0, 0}, {0, 0, 0}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}}, {{{1, 0, 1}, {0, 0, 0}, {0, 0, 0}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}}};
-// vector<vector<vector<vector<int>>>> cube_color = {{{{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}}, {{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}}, {{{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}}, {{{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}}, {{{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}}};
+// vector<vector<vector<vector<int>>>> cube_color = {{{{1, 0, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}}, {{{0, 1, 0}, {0, 0, 0}, {0, 0, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{0, 0, 1}, {0, 0, 0}, {0, 0, 0}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}}, {{{1, 1, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}}, {{{0, 1, 1}, {0, 0, 0}, {0, 0, 0}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}}, {{{1, 0, 1}, {0, 0, 0}, {0, 0, 0}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}}};
+vector<vector<vector<vector<int>>>> cube_color = {{{{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}}, {{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}}, {{{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}}, {{{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}}, {{{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}}};
 vector<vector<vector<string>>> cube_pos = {{{"F1", "F2", "F3"}, {"F4", "F5", "F6"}, {"F7", "F8", "F9"}}, {{"B1", "B2", "B3"}, {"B4", "B5", "B6"}, {"B7", "B8", "B9"}}, {{"L1", "L2", "L3"}, {"L4", "L5", "L6"}, {"L7", "L8", "L9"}}, {{"R1", "R2", "R3"}, {"R4", "R5", "R6"}, {"R7", "R8", "R9"}}, {{"U1", "U2", "U3"}, {"U4", "U5", "U6"}, {"U7", "U8", "U9"}}, {{"D1", "D2", "D3"}, {"D4", "D5", "D6"}, {"D7", "D8", "D9"}}};
 
 int flag = 0;                 // To check if the mouse left key is pressed or not
@@ -52,6 +52,18 @@ void change_camera_position(int x, int y); // To change the camera view using mo
 
 void get_current_pos();
 
+void draw_user_buttons();
+
+void rotate_left_face(int flag);
+void rotate_right_face(int flag);
+void rotate_front_face(int flag);
+void rotate_back_face(int flag);
+void rotate_top_face(int flag);
+void rotate_bottom_face(int flag);
+
+void shuffle_cube();
+void solve_cube();
+
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
@@ -80,11 +92,7 @@ void init()
 void display()
 {
     cube();
-    cube_rotate_col(0, 180, 1);
-    // cube_rotate_row(0, 90, 0);
-    // cube_rotate_face(2, 90, 1);
-
-    get_current_pos();
+    // get_current_pos();
 }
 
 void reshape(int width, int height)
@@ -100,6 +108,42 @@ void detect_button(int button, int state, int x, int y)
 {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
+        if (x >= 33 && x <= 137 && y >= 510 && y <= 562)
+        {
+            rotate_left_face(0);
+            return;
+        }
+
+        else if (x >= 190 && x <= 295 && y >= 510 && y <= 562)
+        {
+            rotate_right_face(0);
+            return;
+        }
+
+        else if (x >= 345 && x <= 450 && y >= 510 && y <= 562)
+        {
+            rotate_front_face(0);
+            return;
+        }
+
+        else if (x >= 500 && x <= 605 && y >= 510 && y <= 562)
+        {
+            rotate_back_face(0);
+            return;
+        }
+
+        else if (x >= 655 && x <= 760 && y >= 510 && y <= 562)
+        {
+            rotate_top_face(0);
+            return;
+        }
+
+        else if (x >= 810 && x <= 925 && y >= 510 && y <= 562)
+        {
+            rotate_bottom_face(0);
+            return;
+        }
+
         btn_x = x;
         btn_y = y;
         flag = 1;
@@ -108,6 +152,45 @@ void detect_button(int button, int state, int x, int y)
     else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
     {
         flag = 0;
+    }
+
+    if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+    {
+        if (x >= 33 && x <= 137 && y >= 510 && y <= 562)
+        {
+            rotate_left_face(1);
+            return;
+        }
+
+        else if (x >= 190 && x <= 295 && y >= 510 && y <= 562)
+        {
+            rotate_right_face(1);
+            return;
+        }
+
+        else if (x >= 345 && x <= 450 && y >= 510 && y <= 562)
+        {
+            rotate_front_face(1);
+            return;
+        }
+
+        else if (x >= 500 && x <= 605 && y >= 510 && y <= 562)
+        {
+            rotate_back_face(1);
+            return;
+        }
+
+        else if (x >= 655 && x <= 760 && y >= 510 && y <= 562)
+        {
+            rotate_top_face(1);
+            return;
+        }
+
+        else if (x >= 810 && x <= 925 && y >= 510 && y <= 562)
+        {
+            rotate_bottom_face(1);
+            return;
+        }
     }
 }
 
@@ -455,7 +538,10 @@ void cube()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    glTranslated(0, 0, -20);
+    glTranslated(0, 0, -10);
+    draw_user_buttons();
+    glTranslated(0, 0, -10);
+
     glRotated(angle1, 1, 0, 0);
     glRotated(angle2, 0, 1, 0);
 
@@ -540,6 +626,8 @@ void cube_rotate_col(int x, int angle, int reverse)
                 cube_pos[2][1][0] = temp1;
             }
 
+            cube();
+
             return;
         }
 
@@ -559,7 +647,7 @@ void cube_rotate_col(int x, int angle, int reverse)
             cube_col2();
             cube_col3();
 
-            glutSwapBuffer();
+            glutSwapBuffers();
         }
 
         vector<int> temp;
@@ -630,6 +718,8 @@ void cube_rotate_col(int x, int angle, int reverse)
                     cube_color[4][i][1] = temp;
                 }
             }
+
+            cube();
 
             return;
         }
@@ -723,6 +813,8 @@ void cube_rotate_col(int x, int angle, int reverse)
                 cube_color[3][1][2] = temp;
             }
 
+            cube();
+
             return;
         }
 
@@ -775,6 +867,8 @@ void cube_rotate_col(int x, int angle, int reverse)
             cube_color[3][1][0] = temp;
         }
     }
+
+    cube();
 }
 
 void cube_row1()
@@ -796,7 +890,7 @@ void cube_row1()
 
     for (int i = 0; i < 3; i++)
     {
-        cube_back_face(cube_color[1][0][i]);
+        cube_back_face(cube_color[1][2][2 - i]);
         glTranslated(-2, 0, 0);
     }
 
@@ -895,14 +989,14 @@ void cube_row3()
 {
     for (int i = 0; i < 3; i++)
     {
-        cube_front_face(cube_color[0][1][i]);
+        cube_front_face(cube_color[0][2][i]);
         glTranslated(2, 0, 0);
     }
     glTranslated(-6, 0, 0);
 
     for (int i = 0; i < 3; i++)
     {
-        cube_right_face(cube_color[3][1][i]);
+        cube_right_face(cube_color[3][2][i]);
         glTranslated(0, 0, -2);
     }
 
@@ -910,14 +1004,14 @@ void cube_row3()
 
     for (int i = 0; i < 3; i++)
     {
-        cube_back_face(cube_color[1][1][i]);
+        cube_back_face(cube_color[1][0][2 - i]);
         glTranslated(-2, 0, 0);
     }
 
     glTranslated(6, 0, 0);
     for (int i = 0; i < 3; i++)
     {
-        cube_left_face(cube_color[2][1][i]);
+        cube_left_face(cube_color[2][2][i]);
         glTranslated(0, 0, 2);
     }
     glTranslated(0, 0, -6);
@@ -1000,6 +1094,8 @@ void cube_rotate_row(int x, int angle, int reverse)
                 cube_color[4][2][1] = cube_color[4][1][2];
                 cube_color[4][1][2] = temp;
             }
+
+            cube();
 
             return;
         }
@@ -1087,6 +1183,8 @@ void cube_rotate_row(int x, int angle, int reverse)
                     cube_color[2][1][i] = temp;
                 }
             }
+
+            cube();
 
             return;
         }
@@ -1176,6 +1274,8 @@ void cube_rotate_row(int x, int angle, int reverse)
                 cube_color[5][1][0] = temp;
             }
 
+            cube();
+
             return;
         }
 
@@ -1203,7 +1303,7 @@ void cube_rotate_row(int x, int angle, int reverse)
         {
             for (int i = 0; i < 3; i++)
             {
-                temp = cube_color[0][0][i];
+                temp = cube_color[0][2][i];
                 cube_color[0][2][i] = cube_color[2][2][i];
                 cube_color[2][2][i] = cube_color[1][0][2 - i];
                 cube_color[1][0][2 - i] = cube_color[3][2][i];
@@ -1226,6 +1326,8 @@ void cube_rotate_row(int x, int angle, int reverse)
             cube_color[5][1][2] = temp;
         }
     }
+
+    cube();
 }
 
 void cube_face1()
@@ -1268,7 +1370,7 @@ void cube_face1()
 
     for (int i = 0; i < 3; i++)
     {
-        cube_top_face(cube_color[4][2][i]);
+        cube_top_face(cube_color[4][2][2 - i]);
         glTranslated(-2, 0, 0);
     }
 
@@ -1329,7 +1431,7 @@ void cube_face2()
 
     for (int i = 0; i < 3; i++)
     {
-        cube_top_face(cube_color[4][1][i]);
+        cube_top_face(cube_color[4][1][2 - i]);
         glTranslated(-2, 0, 0);
     }
 
@@ -1388,7 +1490,7 @@ void cube_face3()
 
     for (int i = 0; i < 3; i++)
     {
-        cube_top_face(cube_color[4][0][i]);
+        cube_top_face(cube_color[4][0][2 - i]);
         glTranslated(-2, 0, 0);
     }
 
@@ -1435,16 +1537,16 @@ void cube_rotate_face(int x, int angle, int reverse)
                 for (int i = 0; i < 3; i++)
                 {
                     temp = cube_color[2][i][2];
-                    cube_color[2][i][2] = cube_color[4][2][i];
-                    cube_color[4][2][i] = cube_color[3][i][0];
-                    cube_color[3][i][0] = cube_color[5][0][i];
+                    cube_color[2][i][2] = cube_color[4][2][2 - i];
+                    cube_color[4][2][2 - i] = cube_color[3][2 - i][0];
+                    cube_color[3][2 - i][0] = cube_color[5][0][i];
                     cube_color[5][0][i] = temp;
                 }
             }
 
             for (int k = 0; k < (angle / 90); k++)
             {
-                temp = cube_color[4][0][0];
+                temp = cube_color[0][0][0];
                 cube_color[0][0][0] = cube_color[0][0][2];
                 cube_color[0][0][2] = cube_color[0][2][2];
                 cube_color[0][2][2] = cube_color[0][2][0];
@@ -1456,6 +1558,8 @@ void cube_rotate_face(int x, int angle, int reverse)
                 cube_color[0][2][1] = cube_color[0][1][0];
                 cube_color[0][1][0] = temp;
             }
+
+            cube();
 
             return;
         }
@@ -1483,9 +1587,9 @@ void cube_rotate_face(int x, int angle, int reverse)
         {
             for (int i = 0; i < 3; i++)
             {
-                temp = cube_color[2][i][2];
-                cube_color[2][i][2] = cube_color[5][0][i];
-                cube_color[5][0][i] = cube_color[3][i][0];
+                temp = cube_color[2][2 - i][2];
+                cube_color[2][2 - i][2] = cube_color[5][0][2 - i];
+                cube_color[5][0][2 - i] = cube_color[3][i][0];
                 cube_color[3][i][0] = cube_color[4][2][i];
                 cube_color[4][2][i] = temp;
             }
@@ -1537,12 +1641,14 @@ void cube_rotate_face(int x, int angle, int reverse)
                 for (int i = 0; i < 3; i++)
                 {
                     temp = cube_color[2][i][1];
-                    cube_color[2][i][1] = cube_color[4][1][i];
-                    cube_color[4][1][i] = cube_color[3][i][1];
-                    cube_color[3][i][1] = cube_color[5][1][i];
+                    cube_color[2][i][1] = cube_color[4][1][2 - i];
+                    cube_color[4][1][2 - i] = cube_color[3][2 - i][1];
+                    cube_color[3][2 - i][1] = cube_color[5][1][i];
                     cube_color[5][1][i] = temp;
                 }
             }
+
+            cube();
 
             return;
         }
@@ -1572,9 +1678,9 @@ void cube_rotate_face(int x, int angle, int reverse)
         {
             for (int i = 0; i < 3; i++)
             {
-                temp = cube_color[2][i][2];
-                cube_color[2][i][1] = cube_color[5][1][i];
-                cube_color[5][1][i] = cube_color[3][i][1];
+                temp = cube_color[2][2 - i][2];
+                cube_color[2][2 - i][1] = cube_color[5][1][2 - i];
+                cube_color[5][1][2 - i] = cube_color[3][i][1];
                 cube_color[3][i][1] = cube_color[4][1][i];
                 cube_color[4][1][i] = temp;
             }
@@ -1610,9 +1716,9 @@ void cube_rotate_face(int x, int angle, int reverse)
                 for (int i = 0; i < 3; i++)
                 {
                     temp = cube_color[2][i][0];
-                    cube_color[2][i][0] = cube_color[4][0][i];
-                    cube_color[4][0][i] = cube_color[3][i][2];
-                    cube_color[3][i][2] = cube_color[5][2][i];
+                    cube_color[2][i][0] = cube_color[4][0][2 - i];
+                    cube_color[4][0][2 - i] = cube_color[3][2 - i][2];
+                    cube_color[3][2 - i][2] = cube_color[5][2][i];
                     cube_color[5][2][i] = temp;
                 }
             }
@@ -1631,6 +1737,8 @@ void cube_rotate_face(int x, int angle, int reverse)
                 cube_color[1][2][1] = cube_color[1][1][2];
                 cube_color[1][1][2] = temp;
             }
+
+            cube();
 
             return;
         }
@@ -1659,9 +1767,9 @@ void cube_rotate_face(int x, int angle, int reverse)
         {
             for (int i = 0; i < 3; i++)
             {
-                temp = cube_color[2][i][0];
-                cube_color[2][i][0] = cube_color[5][2][i];
-                cube_color[5][2][i] = cube_color[3][i][2];
+                temp = cube_color[2][2 - i][0];
+                cube_color[2][2 - i][0] = cube_color[5][2][2 - i];
+                cube_color[5][2][2 - i] = cube_color[3][i][2];
                 cube_color[3][i][2] = cube_color[4][0][i];
                 cube_color[4][0][i] = temp;
             }
@@ -1682,6 +1790,8 @@ void cube_rotate_face(int x, int angle, int reverse)
             cube_color[1][1][0] = temp;
         }
     }
+
+    cube();
 }
 
 void get_current_pos()
@@ -1741,6 +1851,136 @@ void get_current_pos()
             s.append(temp);
         }
     }
+}
 
-    cout << s;
+void draw_user_buttons()
+{
+    glBegin(GL_QUADS);
+    glColor3f(1, 1, 1);
+    glVertex2d(-9, -4);
+    glVertex2d(-9, -5);
+    glVertex2d(-7, -5);
+    glVertex2d(-7, -4);
+
+    glVertex2d(-6, -4);
+    glVertex2d(-6, -5);
+    glVertex2d(-4, -5);
+    glVertex2d(-4, -4);
+
+    glVertex2d(-3, -4);
+    glVertex2d(-3, -5);
+    glVertex2d(-1, -5);
+    glVertex2d(-1, -4);
+
+    glVertex2d(0, -4);
+    glVertex2d(0, -5);
+    glVertex2d(2, -5);
+    glVertex2d(2, -4);
+
+    glVertex2d(3, -4);
+    glVertex2d(3, -5);
+    glVertex2d(5, -5);
+    glVertex2d(5, -4);
+
+    glVertex2d(6, -4);
+    glVertex2d(6, -5);
+    glVertex2d(8.2, -5);
+    glVertex2d(8.2, -4);
+
+    glVertex2d(6, 1);
+    glVertex2d(6, 2);
+    glVertex2d(8.2, 2);
+    glVertex2d(8.2, 1);
+
+    glVertex2d(6, 0);
+    glVertex2d(6, -1);
+    glVertex2d(8.2, -1);
+    glVertex2d(8.2, 0);
+
+    glEnd();
+
+    string s = "Left Face";
+    glColor3f(0, 0, 0);
+    glRasterPos3f(-8.6, -4.55, 0.1);
+    int len, i;
+    len = s.length();
+    for (i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s[i]);
+    }
+
+    s = "Right Face";
+    glColor3f(0, 0, 0);
+    glRasterPos3f(-5.75, -4.55, 0.1);
+    len = s.length();
+    for (i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s[i]);
+    }
+
+    s = "Front Face";
+    glColor3f(0, 0, 0);
+    glRasterPos3f(-2.8, -4.55, 0.1);
+    len = s.length();
+    for (i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s[i]);
+    }
+
+    s = "Back Face";
+    glColor3f(0, 0, 0);
+    glRasterPos3f(0.2, -4.55, 0.1);
+    len = s.length();
+    for (i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s[i]);
+    }
+
+    s = "Top Face";
+    glColor3f(0, 0, 0);
+    glRasterPos3f(3.2, -4.55, 0.1);
+    len = s.length();
+    for (i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s[i]);
+    }
+
+    s = "Bottom Face";
+    glColor3f(0, 0, 0);
+    glRasterPos3f(6, -4.55, 0.1);
+    len = s.length();
+    for (i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s[i]);
+    }
+}
+
+void rotate_left_face(int flag)
+{
+    cube_rotate_col(0, 90, flag);
+}
+
+void rotate_right_face(int flag)
+{
+    cube_rotate_col(2, 90, flag);
+}
+
+void rotate_front_face(int flag)
+{
+    cube_rotate_face(0, 90, flag);
+}
+
+void rotate_back_face(int flag)
+{
+    cube_rotate_face(2, 90, flag);
+}
+
+void rotate_top_face(int flag)
+{
+    cube_rotate_row(0, 90, flag);
+}
+
+void rotate_bottom_face(int flag)
+{
+    cube_rotate_row(2, 90, flag);
 }
