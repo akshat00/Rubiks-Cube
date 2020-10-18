@@ -227,7 +227,7 @@ void change_camera_position(int x, int y)
         btn_x = x;
         btn_y = y;
 
-        cout << angle1 << " " << angle2 << endl;
+        // cout << angle1 << " " << angle2 << endl;
 
         cube();
     }
