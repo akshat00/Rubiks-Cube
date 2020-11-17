@@ -1,14 +1,26 @@
 //File for graphics
 
+#include <windows.h>
 #include <GL/glut.h>
 #include <vector>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
 
 using namespace std;
 
 void init();
 void display();
 void reshape(int, int);
+void title();
+void r();
+void u();
+void b();
+void i();
+void k();
+void s();
+
 
 // Array to store the color values of the different faces in the rubik's cube
 // vector<vector<vector<vector<int>>>> cube_color = {{{{1, 0, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}}, {{{0, 1, 0}, {0, 0, 0}, {0, 0, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{0, 0, 1}, {0, 0, 0}, {0, 0, 0}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}, {{0, 0, 1}, {0, 0, 1}, {0, 0, 1}}}, {{{1, 1, 0}, {0, 0, 0}, {0, 0, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}, {{1, 1, 0}, {1, 1, 0}, {1, 1, 0}}}, {{{0, 1, 1}, {0, 0, 0}, {0, 0, 0}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}, {{0, 1, 1}, {0, 1, 1}, {0, 1, 1}}}, {{{1, 0, 1}, {0, 0, 0}, {0, 0, 0}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}, {{1, 0, 1}, {1, 0, 1}, {1, 0, 1}}}};
@@ -50,7 +62,7 @@ void detect_button(int button, int state, int x, int y); // To detect when the l
 
 void change_camera_position(int x, int y); // To change the camera view using mouse inputs
 
-void get_current_pos(); //To get the current configuration of the rubik's cube for solving
+string get_current_pos(); //To get the current configuration of the rubik's cube for solving
 
 void draw_user_buttons(); //To draw the various user buttons on the screen
 
@@ -91,6 +103,7 @@ void init()
 
 void display()
 {
+//    title();
     cube();
     // get_current_pos();
 }
@@ -100,6 +113,7 @@ void reshape(int width, int height)
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+//    gluOrtho2D(-10,10,-10,10);
     gluPerspective(60, 1.67, 2, 50);
     glMatrixMode(GL_MODELVIEW);
 }
@@ -143,6 +157,19 @@ void detect_button(int button, int state, int x, int y)
             rotate_bottom_face(0);
             return;
         }
+
+        else if (x >= 810 && x <= 925 && y >= 195 && y <= 246)
+        {
+            shuffle_cube();
+            return;
+     }
+
+        else if (x >= 810 && x <= 925 && y >= 299 && y <= 351)
+        {
+            solve_cube();
+            return;
+        }
+
 
         btn_x = x;
         btn_y = y;
@@ -221,8 +248,8 @@ void change_camera_position(int x, int y)
 
         angle1 -= (btn_y - y) * 0.5;
 
-        angle1 = (abs(angle1) > 360) ? 0 : angle1;
-        angle2 = (abs(angle2) > 360) ? 0 : angle2;
+        angle1 = (abs((int)angle1) > 360) ? 0 : angle1;
+        angle2 = (abs((int)angle2) > 360) ? 0 : angle2;
 
         btn_x = x;
         btn_y = y;
@@ -542,6 +569,7 @@ void cube()
 
     glTranslated(0, 0, -10);
     draw_user_buttons();
+    title();
     glTranslated(0, 0, -10);
 
     glRotated(angle1, 1, 0, 0);
@@ -1796,7 +1824,7 @@ void cube_rotate_face(int x, int angle, int reverse)
     cube();
 }
 
-void get_current_pos()
+string get_current_pos()
 {
     string s, temp;
 
@@ -1853,6 +1881,8 @@ void get_current_pos()
             s.append(temp);
         }
     }
+
+    return s;
 }
 
 void draw_user_buttons()
@@ -1955,6 +1985,24 @@ void draw_user_buttons()
     {
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s[i]);
     }
+
+     s = "Shuffle Cube";
+    glColor3f(0, 0, 0);
+    glRasterPos3f(6, 1.35, 0.1);
+    len = s.length();
+    for (i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s[i]);
+    }
+
+     s = "Solve Cube";
+    glColor3f(0, 0, 0);
+    glRasterPos3f(6.1, -0.65, 0.1);
+    len = s.length();
+    for (i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s[i]);
+    }
 }
 
 void rotate_left_face(int flag)
@@ -2045,4 +2093,330 @@ void rotate_bottom_face(int flag)
 
     else if ((angle1 <= 45 && angle1 >= -45 && angle2 <= -225 && angle2 >= -315) || (angle1 <= 45 && angle1 >= -45 && angle2 <= 135 && angle2 >= 45))
         cube_rotate_row(2, 90, flag);
+}
+
+void shuffle_cube()
+{
+    {
+    int x, i;
+    srand((unsigned) time(0));
+    for(i = 0; i < 30; i++)
+    {
+        x = (int)rand()%12 + 1;
+        switch(x)
+        {
+        case 1:
+            rotate_top_face(0);
+            break;
+        case 2:
+            rotate_bottom_face(0);
+            break;
+        case 3:
+            rotate_left_face(0);
+            break;
+        case 4:
+            rotate_front_face(0);
+            break;
+        case 5:
+            rotate_right_face(0);
+            break;
+        case 6:
+            rotate_back_face(0);
+            break;
+        case 7:
+            rotate_top_face(1);
+            break;
+        case 8:
+            rotate_bottom_face(1);
+            break;
+        case 9:
+            rotate_left_face(1);
+            break;
+        case 10:
+            rotate_right_face(1);
+            break;
+        case 11:
+            rotate_front_face(1);
+            break;
+        case 12:
+            rotate_back_face(1);
+            break;
+        }
+    }
+}
+
+}
+void title(){
+
+//    glClear(GL_COLOR_BUFFER_BIT);
+//    glLoadIdentity();
+
+    glPointSize(30.0);
+
+    r();
+    u();
+    b();
+    i();
+    k();
+    s();
+
+}
+void r()
+{
+    glColor3f(1.0,0.0,0.0);
+    glBegin(GL_POINTS);
+
+    glVertex2f(-8,9);
+    glVertex2f(-8,8);
+    glVertex2f(-8,7);
+    glVertex2f(-8,6);
+    glVertex2f(-8,5);
+    glVertex2f(-8,4);
+    glVertex2f(-7.4,9);
+    glVertex2f(-7.4,7);
+    glVertex2f(-6.6,8);
+    glVertex2f(-6.5,5.8);
+    glVertex2f(-6.5,4);
+    glVertex2f(-6.5,5);
+    glVertex2f(-8,9);
+//    glVertex2f(-8,9);
+    glEnd();
+}
+void u()
+{
+    glColor3f(0,1,0);
+    glBegin(GL_POINTS);
+
+    glVertex2f(-5.5,9);
+    glVertex2f(-5.5,8);
+    glVertex2f(-5.5,7);
+    glVertex2f(-5.5,6);
+    glVertex2f(-5.5,5);
+    glVertex2f(-5,4);
+    glVertex2f(-4.5,4);
+    glVertex2f(-4,9);
+    glVertex2f(-4,7);
+    glVertex2f(-4,8);
+    glVertex2f(-4,6);
+    glVertex2f(-4,5);
+
+    glEnd();
+}
+void b()
+{
+    glColor3f(0,0,1);
+    glBegin(GL_POINTS);
+
+    glVertex2f(-3,9);
+    glVertex2f(-3,8);
+    glVertex2f(-3,7);
+    glVertex2f(-3,6);
+    glVertex2f(-3,5);
+    glVertex2f(-3,4);
+    glVertex2f(-2.4,9);
+    glVertex2f(-1.6,8);
+    glVertex2f(-2.4,7);
+    glVertex2f(-1.6,6);
+    glVertex2f(-1.6,5);
+    glVertex2f(-2.4,4);
+
+    glEnd();
+
+}
+void i()
+{
+    glColor3f(0,1,1);
+    glBegin(GL_POINTS);
+
+    glVertex2f(-0.6,9);
+    glVertex2f(-0.6,8);
+    glVertex2f(-0.6,7);
+    glVertex2f(-0.6,6);
+    glVertex2f(-0.6,5);
+    glVertex2f(-0.6,4);
+
+    glEnd();
+
+}
+void k()
+{
+    glColor3f(1,1,0);
+    glBegin(GL_POINTS);
+
+    glVertex2f(0.6,9);
+    glVertex2f(0.6,8);
+    glVertex2f(0.6,7);
+    glVertex2f(0.6,6);
+    glVertex2f(0.6,5);
+    glVertex2f(0.6,4);
+    glVertex2f(2.1,9);
+    glVertex2f(1.8,8);
+    glVertex2f(1.4,7);
+    glVertex2f(1.7,6);
+    glVertex2f(2,5);
+    glVertex2f(2.3,4);
+
+    glEnd();
+
+}
+void s()
+{
+    glColor3f(1,0,1);
+    glBegin(GL_POINTS);
+
+    glVertex2f(3.3,9);
+    glVertex2f(3.3,8);
+    glVertex2f(3.3,7);
+    glVertex2f(4.8,6);
+    glVertex2f(4.8,5);
+    glVertex2f(3.3,4);
+    glVertex2f(4,9);
+    glVertex2f(4.8,9);
+    glVertex2f(4,7);
+    glVertex2f(4.8,7);
+    glVertex2f(4,4);
+    glVertex2f(4.8,4);
+
+    glEnd();
+
+}
+
+void solve_cube()
+{
+    angle1 = 0;
+    angle2 = 30;
+    ofstream fout("C:\\Users\\agmoh\\Desktop\\CG PROJECT\\POSITION.txt", ios::out);
+    fout<<get_current_pos();
+
+    fout.close();
+
+
+    ifstream fin;
+
+    fin.open("C:\\Users\\agmoh\\Desktop\\CG PROJECT\\SOLUTION.txt", ios::in);
+
+    string ch;
+
+    while(fin){
+        getline(fin, ch);
+    }
+
+    fin.close();
+    int length = ch.length();
+    char x;
+
+    for(int i = 0; i < length; i++)
+    {
+        x = ch[i];
+
+        i++;
+        if(ch[i] == '\'' && i < length)
+        {
+            switch(x){
+            case 'U':
+                cout<<"U1";
+                rotate_top_face(1);
+                i++;
+                break;
+            case 'D':
+                cout<<"D1";
+                rotate_bottom_face(1);
+                i++;
+                break;
+            case 'L':
+                cout<<"L1";
+                rotate_left_face(1);
+                i++;
+                break;
+            case 'R':
+                cout<<"R1";
+                rotate_right_face(1);
+                i++;
+                break;
+            case 'F':
+                cout<<"F1";
+                rotate_front_face(1);
+                i++;
+                break;
+            case 'B':
+                cout<<"B1";
+                rotate_back_face(1);
+                i++;
+                break;
+            }
+        }
+        else if (ch[i] == '2' && i < length)
+            {
+                switch(x)
+                {
+                    case 'U':
+                        rotate_top_face(0);
+                        rotate_top_face(0);
+                        cout<<"UU";
+                        i++;
+                        break;
+                    case 'D':
+                        rotate_bottom_face(0);
+                        rotate_bottom_face(0);
+                        cout<<"DD";
+                        i++;
+                        break;
+                    case 'L':
+                        rotate_left_face(0);
+                        rotate_left_face(0);
+                        cout<<"LL";
+                        i++;
+                        break;
+                    case 'R':
+                        cout<<"RR";
+                        rotate_right_face(0);
+                        rotate_right_face(0);
+                        i++;
+                        break;
+                    case 'F':
+                        cout<<"FF";
+                        rotate_front_face(0);
+                        rotate_front_face(0);
+                        i++;
+                        break;
+                    case 'B':
+                        cout<<"BB";
+                        rotate_back_face(0);
+                        rotate_back_face(0);
+                        i++;
+                        break;
+                }
+            }
+        else
+            {
+            switch(x)
+            {
+
+                case 'U':
+                    cout<<"U";
+                    rotate_top_face(0);
+                    break;
+                case 'D':
+                    cout<<"D";
+                    rotate_bottom_face(0);
+                    break;
+                case 'L':
+                    cout<<"L";
+                    rotate_left_face(0);
+                    break;
+                case 'R':
+                    cout<<"R";
+                    rotate_right_face(0);
+                    break;
+                case 'F':
+                    cout<<"F";
+                    rotate_front_face(0);
+                    break;
+                case 'B':
+                    cout<<"B";
+                    rotate_back_face(0);
+                    break;
+            }
+        }
+    }
 }
